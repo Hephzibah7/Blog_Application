@@ -2,11 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import cors from "cors";
+import userRoutes from "./route/user.js";
 
 const app = express();
 app.use(express.json());
 
-app.use(cors()); // Use the cors middleware
+app.use(cors({
+    credentials:true
+  }));
 
 const mongoURI =
   "mongodb+srv://heph:heph@cluster0.mjeeyir.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"; // Replace 'your_mongodb_atlas_connection_string' with your actual MongoDB Atlas connection string
@@ -14,6 +17,8 @@ mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+app.use("/auth", userRoutes);
 
 // Start the server
 const port = 9002;
