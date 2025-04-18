@@ -9,7 +9,8 @@ const blogSchema=mongoose.Schema({
     image: {type:String},
     userId: {type:ObjectId},
     createdAt: {type:Date},
-    updatedAt: {type:Date}
+    updatedAt: {type:Date},
+    view:{type:Number, required:true}
 })
 
 const Blog=mongoose.Model('Blog', blogSchema);
