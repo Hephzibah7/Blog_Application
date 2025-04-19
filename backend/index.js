@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import cors from "cors";
 import userRoutes from "./route/user.js";
+import blogRoutes from "./route/blog.js";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ mongoose.connect(mongoURI, {
 });
 
 app.use("/auth", userRoutes);
+app.use("/", blogRoutes);
 
 // Start the server
 const port = 9002;

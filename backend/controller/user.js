@@ -28,28 +28,32 @@ async function signup(req, res){
     }
 }
 
-async function login(req, res){
-    try{
-        const {email, password} = req.body;
-        if(!email || !password) res.status(400).json({message:"Email and password are required"});
-
-        const existingUser=await User.findOne({email});
-        if(!existingUser) res.status(404).json({message:"User not Found "});
-
-        const isPasswordValid=bcrypt.compare(password, existingUser.password);
-        if(!isPasswordValid) res.status(401).json({message:"Invalid Credentials"});
-
-        const secretKey=process.env.secretKey;
-        const token = jwt.sign({ userId: existingUser._id }, secretKey, {
-            expiresIn: "1h",
-          });
-          res.json({ userId: existingUser._id, token });
-        res.status(200).json({message:"Login Successfull"});
+async function login(req, res) {
+    try {
+      const { email, password } = req.body;
+  
+      if (!email || !password)
+        return res.status(400).json({ message: "Email and password are required" });
+  
+      const existingUser = await User.findOne({ email });
+      if (!existingUser)
+        return res.status(404).json({ message: "User not found" });
+  
+      const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+      if (!isPasswordValid)
+        return res.status(401).json({ message: "Invalid credentials" });
+  
+      const secretKey = process.env.secretKey;
+      const token = jwt.sign({ userId: existingUser._id }, secretKey, {
+        expiresIn: "1h",
+      });
+  
+      res.status(200).json({ userId: existingUser._id, token, message: "Login successful" });
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).send("Error logging in. Please try again later.");
     }
-    catch(error){
-        res.status(500).send("Error logging in. Please try again later.");
-    }
-}
+  }
 
 const userController={
     signup:signup,

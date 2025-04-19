@@ -13,6 +13,6 @@ const blogSchema=mongoose.Schema({
     view:{type:Number, required:true}
 })
 
-const Blog=mongoose.Model('Blog', blogSchema);
+const Blog=mongoose.model('Blog', blogSchema);
 
 export default Blog;
