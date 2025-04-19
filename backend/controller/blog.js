@@ -8,21 +8,23 @@ dotenv.config();
 
 async function createBlog(req, res){
     try{
+        console.log("hello");
+        console.log(req.body);
         const {title, category,content}=req.body;
         const createdAt=new Date();
         const updatedAt=new Date();
         
         const image = req.file ? req.file.filename : null; // optional image
         const view=0;
-        if(!title || !category ||  !content) req.status(400).json({message:"Details are missing"});
+        if(!title || !category ||  !content) return req.status(400).json({message:"Details are missing"});
         const userId=req.user.userId;
-        const user=User.findOne(userId);
+        const user=await User.findById(userId);
         const newBlog=new Blog({title:title, category:category, content:content, image:image, author:user.name, createdAt, updatedAt, userId:userId, view:view});
         const savedBlog=await newBlog.save();
-        res.status(200).json({message:"Blog successfully created"});
+        return res.status(200).json({message:"Blog successfully created"});
     }
     catch(error){
-        res.status(500).json({message:"Error creating Blog"});
+        return res.status(500).json({message:"Error creating Blog"});
     }
 }
 async function getUserBlogs(req, res){

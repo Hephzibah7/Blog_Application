@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1];
-    const secretKey = process.env.secretKey;
+    const secretKey = process.env.SECRET_KEY;
 
     // Verify the token
     const decoded = jwt.verify(token, secretKey);
