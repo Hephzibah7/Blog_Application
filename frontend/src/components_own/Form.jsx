@@ -18,7 +18,6 @@ const Form=({isOpen, closeModal})=>{
     }
     // Handles all text inputs
   const handleChange = (e) => {
-    console.log("hello");
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
