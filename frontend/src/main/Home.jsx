@@ -15,6 +15,7 @@ const Home=()=>{
         <>
             <div className="w-screen h-auto  ">
             <Navbar/>
+           
             <MyBlog openModal={openModal}/>
             <Form isOpen={isModalOpen} closeModal={closeModal}/>
             <Footer/>

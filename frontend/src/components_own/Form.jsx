@@ -1,9 +1,38 @@
 import React from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const Form=({isOpen, closeModal})=>{
-    const handleSubmit=()=>{
+
+    const [formData, setFormData]=useState({
+        title:"",
+        category:"",
+        content:"",
+        image:null
+    });
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
         closeModal();
+        const response=await axios.post("http://localhost:9002/blogs", formData);
+        console.log(response);
     }
+    // Handles all text inputs
+  const handleChange = (e) => {
+    console.log("hello");
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Handles file input separately
+  const handleImageChange = (e) => {
+    setFormData({
+      ...formData,
+      image: e.target.files[0],
+    });
+  };
+
     if(!isOpen) return null;
     return (
         <>
@@ -18,20 +47,29 @@ const Form=({isOpen, closeModal})=>{
         <h2 className="text-xl font-semibold mb-4">Create a New Blog</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
+          value={formData.title}
             type="text"
             placeholder="Blog Title"
             className="w-full border border-gray-300 px-3 py-2 rounded"
+            name="title"
+            onChange={handleChange}
             required
           />
           <input
             type="text"
             placeholder="Category"
             className="w-full border border-gray-300 px-3 py-2 rounded"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
             required
           />
           <textarea
             placeholder="Blog Content"
             className="w-full border border-gray-300 px-3 py-2 rounded h-32 resize-none"
+            name="content"
+            value={formData.content}
+            onChange={handleChange}
             required
           ></textarea>
           <div>
@@ -41,12 +79,13 @@ const Form=({isOpen, closeModal})=>{
     <input
       type="file"
       accept="image/*"
+      onChange={handleImageChange}
       className="w-full border border-gray-300 px-3 py-2 rounded file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-gray-100 hover:file:bg-gray-200"
     />
   </div>
           <button
             type="submit"
-            className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-black"
           >
             Post Blog
           </button>
