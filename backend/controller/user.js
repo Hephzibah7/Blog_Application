@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import dotenv from "dotenv";
 
-
-
 dotenv.config();
 
 async function signup(req, res){
@@ -35,7 +33,7 @@ async function login(req, res) {
       if (!email || !password)
         return res.status(400).json({ message: "Email and password are required" });
   
-      const existingUser = await User.findOne({ email });
+      const existingUser = await User.findOne({ email:email });
       if (!existingUser)
         return res.status(404).json({ message: "User not found" });
   
@@ -43,8 +41,9 @@ async function login(req, res) {
       if (!isPasswordValid)
         return res.status(401).json({ message: "Invalid credentials" });
   
-      const secretKey = process.env.secretKey;
-      const token = jwt.sign({ userId: existingUser._id }, secretKey, {
+      const secretKey = process.env.SECRET_KEY;
+      
+      const token = jwt.sign({ userId: existingUser._id, username: existingUser.name }, secretKey, {
         expiresIn: "1h",
       });
   
