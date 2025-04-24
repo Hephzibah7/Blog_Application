@@ -4,12 +4,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {ToastContainer, toast} from "react-toastify";
 import Cookies from "js-cookie"
+import { useUserContext } from "./hooks/UserProvider";
 
 const Login = ()=>{
     const [userData, setUserData]=useState({
         email:"",
         password:""
     })
+    const {setUserGlobalData}=useUserContext();
+    
 const navigate = useNavigate();
     const handleChange=(e)=>{
         setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -28,6 +31,16 @@ const navigate = useNavigate();
                 expires: 7, 
                 sameSite: 'strict'
               });
+              Cookies.set('userId', response.data.userId, { 
+                expires: 7, 
+                sameSite: 'strict'
+              });
+              Cookies.set('username', response.data.username, { 
+                expires: 7, 
+                sameSite: 'strict'
+              });
+              console.log(response.data);
+              setUserGlobalData(response.data.userId, response.data.username);
               setUserData({email:"", password:""});
               setTimeout(()=>navigate("/home"), 2000);
               

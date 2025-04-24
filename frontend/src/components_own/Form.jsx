@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const Form = ({ isOpen, closeModal }) => {
+const Form = ({ isOpen, closeModal, getBlogs }) => {
 
   const [formData, setFormData] = useState({
     title: "",
@@ -32,7 +32,8 @@ const Form = ({ isOpen, closeModal }) => {
       data.append("image", formData.image); 
     }
     const response = await axios.post("http://localhost:9002/blogs", data, config);
-    console.log(response.data);
+    getBlogs();
+    setFormData({title:"", category:"", content:"", image:null});
   }
   // Handles all text inputs
   const handleChange = (e) => {

@@ -9,7 +9,7 @@ const Navbar=()=>{
                         <h1 className="italic font-bold text-3xl text-pink-500">Magazine</h1>
                     </div>
                     <div>
-                        <div className="flex gap-10 font-bold text-white text-xl pr-20">
+                        <div className="flex gap-10 font-bold text-white text-xl pr-20 cursor-pointer">
                             <div>
                                 <h1>Home</h1>
                             </div>

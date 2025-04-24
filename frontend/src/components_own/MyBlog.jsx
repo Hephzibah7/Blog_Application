@@ -4,41 +4,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const MyBlog = ({ openModal }) => {
+const MyBlog = ({ openModal , getBlogs, blogs}) => {
     const handleAddBlog = () => {
         openModal();
     }
-    const [blogs, setBlogs] = useState([]);
-    const token = Cookies.get("authToken");
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    };
-
+    
     useEffect(() => {
-        const getBlogs = async () => {
-          try {
-            const response = await axios.get('http://localhost:9002/blogs', config);
-            console.log(response.data);
-      
-            // Assuming response.data.blogs is an array
-            const formattedBlogs = response.data.blogs.map((blog) => {
-              const date = new Date(blog.createdAt);
-              const options = { year: 'numeric', month: 'short', day: 'numeric' };
-              const formattedDate = date.toLocaleDateString('en-US', options);
-              return {
-                ...blog,
-                createdAt: formattedDate, // Replace with formatted date
-              };
-            });
-      
-            setBlogs(formattedBlogs);
-          } catch (error) {
-            console.error('Error fetching blogs:', error);
-          }
-        };
-      
         getBlogs();
       }, []);
       
@@ -56,7 +27,7 @@ const MyBlog = ({ openModal }) => {
                             </div>
                         </div>
                         {blogs.map((blog, index) => (
-                            <Card key={index} title={blog.title} author={blog.author} content={blog.content} date={blog.createdAt} image={blog.image} />
+                            <Card key={index} title={blog.title} author={blog.author} content={blog.content} date={blog.createdAt} image={blog.image} bloguserId={blog.userId} blogId={blog._id} getBlogs={getBlogs} />
                         ))}
 
                     </div>
