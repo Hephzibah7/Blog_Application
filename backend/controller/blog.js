@@ -8,8 +8,6 @@ dotenv.config();
 
 async function createBlog(req, res){
     try{
-        console.log("hello");
-        console.log(req.body);
         const {title, category,content}=req.body;
         const createdAt=new Date();
         const updatedAt=new Date();
@@ -30,27 +28,37 @@ async function createBlog(req, res){
 async function getUserBlogs(req, res){
     try{
         const userId=req.user.userId;
-        const blogs=Blog.find({userId:userId});
-        res.status({blogs:blogs});
+        const blogs=await Blog.find({userId:userId});
+        return res.send({blogs:blogs});
     }
     catch{
-        res.status(500).json({message:"Error fetching blogs"});
+        return res.status(500).json({message:"Error fetching blogs"});
     }
 }
 async function getAllBlogs(req, res){
     try{
         const blogs=Blog.find({userId:userId});
-        res.status({blogs:blogs});
+        return res.status({blogs:blogs});
     }
     catch{
-        res.status(500).json({message:"Error fetching blogs"});
+        return res.status(500).json({message:"Error fetching blogs"});
+    }
+}
+async function deleteBlog(req, res){
+    try{
+        
+    }
+    catch(error){
+        return res.status(500).json({message:"Error deleting blog"});
+
     }
 }
 
 const blogController={
     getAllBlogs:getAllBlogs,
     getUserBlogs:getUserBlogs,
-    createBlog:createBlog
+    createBlog:createBlog,
+    deleteBlog:deleteBlog
 }
 
 export default blogController;

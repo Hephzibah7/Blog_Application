@@ -7,6 +7,6 @@ const router=express.Router();
 
 
 router.post("/blogs", verifyToken, upload.single('image'), blogController.createBlog);
-
+router.get("/blogs", verifyToken, blogController.getUserBlogs);
 
 export default router;

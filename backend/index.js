@@ -1,9 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 import cors from "cors";
 import userRoutes from "./route/user.js";
 import blogRoutes from "./route/blog.js";
+import path from "path";
+import { fileURLToPath } from 'url';
 
 const app = express();
 app.use(express.json());
@@ -18,9 +19,14 @@ mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use("/auth", userRoutes);
 app.use("/", blogRoutes);
+console.log(express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static('uploads'));
+
 
 // Start the server
 const port = 9002;
