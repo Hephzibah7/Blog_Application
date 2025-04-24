@@ -1,31 +1,41 @@
 import React from "react";
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+const Card=({title, content, author, date, image})=>{
 
-const Card=()=>{
+    const trim = (text, wordLimit = 30) => {
+        if(text==null) return null;
+        return text.split(" ").slice(0, wordLimit).join(" ") + "...";
+      };
+      
     return(
         <>
          <div className="w-[370px] h-[480px] flex-col cursor-pointer ">
                         <div className="">
-                            <img className="object-contain object-center" src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2022%2F03%2Ffashion-nova-jordyn-woods-office-babe-collection-0.jpg?w=960&cbr=1&q=90&fit=max"/>
+                            <img className="object-contain object-center" src={`http://localhost:9002/uploads/${image}`}/>
                         </div>
                         <div className="flex-col  ">
-                            <div className="font-bold text-xl mt-3">
-                                <h1>Interview with Photographer & UX Designer, Hephzibah Ranjan</h1>
+                            <div className="font-bold text-xl mt-3 flex">
+                                <h1>{title}</h1>
+                                <ArrowOutwardIcon/>
                             </div>
                             <div className="mt-2 text-gray-600">
-                            <h2>
-                        It’s not just about capturing moments — it's about telling stories without saying a word. Every click is a chance to frame emotion, light, color, and perspective into a memory that lasts forever.
-                        </h2>
+                            <h2>{trim(content)}</h2>
                             </div>
                             <div className="flex mt-3">
                                 <div className="font-bold">
-                                    Hephzibah Ranjan
+                                   {author}
                                 </div>
                                 <div>|</div>
                                 <div className="font-bold">
-                                    28 August 2025
+                                    {date}
                                 </div>
                             </div>
-                            <div className="italic cursor-pointer">Read more</div>
+                            <div className="flex">
+                                <div className="cursor-pointer"><EditIcon/></div>
+                                <div className="cursor-pointer"><DeleteIcon/></div>
+                            </div>
                         </div>
                     </div>
         </>

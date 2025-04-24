@@ -82,7 +82,7 @@ const Form = ({ isOpen, closeModal }) => {
               required
             />
             <textarea
-              placeholder="Blog Content"
+              placeholder="Blog Content (min 100 words)"
               className="w-full border border-gray-300 px-3 py-2 rounded h-32 resize-none"
               name="content"
               value={formData.content}
