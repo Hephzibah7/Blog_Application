@@ -47,7 +47,7 @@ async function login(req, res) {
         expiresIn: "1h",
       });
   
-      res.status(200).json({ userId: existingUser._id, token, message: "Login successful" });
+      res.status(200).json({ userId: existingUser._id, username:existingUser.name, token, message: "Login successful" });
     } catch (error) {
       console.error("Login error:", error);
       res.status(500).send("Error logging in. Please try again later.");

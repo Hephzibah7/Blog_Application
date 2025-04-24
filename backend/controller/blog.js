@@ -46,7 +46,9 @@ async function getAllBlogs(req, res){
 }
 async function deleteBlog(req, res){
     try{
-        
+        const blogId=req.params;
+        const deletedUser=await Blog.findByIdAndDelete(blogId);
+        return res.status(200).json({message:"Blog deleted successfully"});
     }
     catch(error){
         return res.status(500).json({message:"Error deleting blog"});
