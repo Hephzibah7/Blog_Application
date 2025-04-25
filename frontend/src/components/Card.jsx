@@ -6,7 +6,7 @@ import { useUserContext } from "../hooks/UserProvider";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import Cookies from "js-cookie"
-const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlogs }) => {
+const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlogs, handleFormData, category, openModal }) => {
 
     const trim = (text, wordLimit = 30) => {
         if (text == null) return null;
@@ -36,6 +36,18 @@ const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlog
 
         }
     }
+    const handleUpdate=async(title, content, image, blogId, category)=>{
+        try{
+            const updateFormData={title:title, content:content, image:image, blogId:blogId, category:category};
+            openModal();
+            handleFormData(updateFormData);
+            console.log("opening form modal");
+            
+        }
+        catch(error){
+
+        }
+    }
     return (
         <>
             <div className="w-[370px] h-[480px] flex-col cursor-pointer ">
@@ -60,7 +72,7 @@ const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlog
                         </div>
                     </div>
                     {userId == bloguserId ? <div className="flex">
-                        <div className="cursor-pointer" onClick={() => handleUpdate(blogId)}><EditIcon /></div>
+                        <div className="cursor-pointer" onClick={() => handleUpdate(title, content, image,  blogId, category)}><EditIcon /></div>
                         <div className="cursor-pointer" onClick={() => handleDelete(blogId)} ><DeleteIcon /></div>
                     </div> : null}
                 </div>

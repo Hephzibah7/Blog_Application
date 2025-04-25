@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const MyBlog = ({ openModal , getBlogs, blogs}) => {
+const MyBlog = ({ openModal , getBlogs, blogs, handleFormData}) => {
     const handleAddBlog = () => {
         openModal();
     }
@@ -27,7 +27,7 @@ const MyBlog = ({ openModal , getBlogs, blogs}) => {
                             </div>
                         </div>
                         {blogs.map((blog, index) => (
-                            <Card key={index} title={blog.title} author={blog.author} content={blog.content} date={blog.createdAt} image={blog.image} bloguserId={blog.userId} blogId={blog._id} getBlogs={getBlogs} />
+                            <Card key={index} title={blog.title} author={blog.author} content={blog.content} date={blog.createdAt} image={blog.image} bloguserId={blog.userId} blogId={blog._id} getBlogs={getBlogs} category={blog.category} handleFormData={handleFormData} openModal={openModal} />
                         ))}
 
                     </div>

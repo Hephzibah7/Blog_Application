@@ -1,15 +1,16 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const Form = ({ isOpen, closeModal, getBlogs }) => {
+const Form = ({ isOpen, closeModal, getBlogs, formUpdateData }) => {
 
   const [formData, setFormData] = useState({
     title: "",
     category: "",
     content: "",
-    image: null
+    image: "",
+    blogId: null
   });
   const token = Cookies.get("authToken");
   const config = {
@@ -17,12 +18,29 @@ const Form = ({ isOpen, closeModal, getBlogs }) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  useEffect(() => {
+    const handleFormInputs=()=>{
+      console.log(formUpdateData);
+      if (formUpdateData) {
+        setFormData({
+          title: formUpdateData.title || "",
+          category: formUpdateData.category || "",
+          content: formUpdateData.content || "",
+          image: null, 
+          blogId: formUpdateData.blogId || "",
+        });
+      }
+    }
+    handleFormInputs();
+  }, [formUpdateData]);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     closeModal();
-    console.log(formData);
-
+    
     // Create a FormData object and append all fields
+    
     const data = new FormData();
     data.append("title", formData.title);
     data.append("category", formData.category);
@@ -31,8 +49,16 @@ const Form = ({ isOpen, closeModal, getBlogs }) => {
     if (formData.image) {
       data.append("image", formData.image); 
     }
+    if(formData.blogId==null){
     const response = await axios.post("http://localhost:9002/blogs", data, config);
+  }
+  else{
+    
+    const response = await axios.put(`http://localhost:9002/blogs/${formData.blogId}`, data, config);
+    console.log(response);
+  }
     getBlogs();
+    
     setFormData({title:"", category:"", content:"", image:null});
   }
   // Handles all text inputs
