@@ -2,7 +2,7 @@ import React from "react";
 import MainBlog from "./MainBlog";
 import AllBlog from "./AllBlog";
 
-const LeftBlog=()=>{
+const LeftBlog=({ openModal , getBlogs, blogs, handleFormData, setAllBlogs })=>{
     return(
         <>
             <div className="w-3/4 h-auto mt-5 border border-black-300 bg-white ml-20 rounded-2xl">
@@ -12,7 +12,7 @@ const LeftBlog=()=>{
                             <MainBlog/>
                         </div>
                         <div>
-                            <AllBlog/>
+                            <AllBlog openModal={openModal} getBlogs={getBlogs} blogs={blogs} handleFormData={handleFormData} setAllBlogs={setAllBlogs}/>
                         </div>
                     </div>
                 </div>

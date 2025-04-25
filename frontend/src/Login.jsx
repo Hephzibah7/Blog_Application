@@ -58,6 +58,9 @@ const navigate = useNavigate();
               });
         }
     }
+    const handleSignUp=()=>{
+        navigate("/");
+    }
 
     return (
         <>
@@ -86,11 +89,11 @@ const navigate = useNavigate();
                                 <input className="rounded-xl p-3 w-3/5 mb-7" name="password" type="password" value={userData.password} onChange={handleChange}></input>
                             </div>
                         </div>
-                        <div className="bg-black text-xl text-white p-3 text-center w-3/5 font-bold rounded-xl">
+                        <div className="bg-black text-xl text-white p-3 text-center w-3/5 font-bold rounded-xl cursor-pointer">
                             <button>Submit</button>
                         </div>
                         <div className="w-3/5 text-lg mt-2 font-bold text-center">
-                           Don't have an account? SignUp
+                           Don't have an account? <span className="text-pink-600 cursor-pointer" onClick={()=>{handleSignUp()}}>SignUp</span>
                         </div>
                        
                         </div>

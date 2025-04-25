@@ -45,11 +45,13 @@ const Form = ({ isOpen, closeModal, getBlogs, formUpdateData }) => {
     data.append("title", formData.title);
     data.append("category", formData.category);
     data.append("content", formData.content);
+    console.log(formData);
 
     if (formData.image) {
       data.append("image", formData.image); 
     }
-    if(formData.blogId==null){
+    if(formData.blogId===""){
+      console.log("yes u r creating a new one");
     const response = await axios.post("http://localhost:9002/blogs", data, config);
   }
   else{

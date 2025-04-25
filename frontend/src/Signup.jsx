@@ -44,6 +44,10 @@ const Signup = () => {
 
     }
 
+    const handleLogin=()=>{
+        navigate("/login");
+    }
+
 
     return (
         <>
@@ -80,11 +84,11 @@ const Signup = () => {
                                                 <input className="rounded-xl p-3 w-3/5 mb-7 " type="password" value={userData.password} name="password" onChange={handleChange} ></input>
                                             </div>
                                         </div>
-                                        <div className="bg-black text-xl text-white p-3 text-center w-3/5 font-bold rounded-xl">
+                                        <div className="bg-black text-xl text-white p-3 text-center w-3/5 font-bold rounded-xl cursor-pointer">
                                             <button>Submit</button>
                                         </div>
                                         <div className="w-3/5 text-lg mt-2 font-bold text-center">
-                                            Already have an account? Sign In
+                                            Already have an account? <span className="text-pink-600 cursor-pointer" onClick={()=>{handleLogin()}}>Sign In</span>
                                         </div>
 
                                     </div>

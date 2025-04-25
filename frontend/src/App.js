@@ -4,7 +4,7 @@ import Login from './Login';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './main/Home';
 import { UserProvider } from './hooks/UserProvider';
-
+import BlogDetails from './components/BlogDetails';
 function App() {
   return (
     <Router>
@@ -26,6 +26,8 @@ function App() {
                 </UserProvider>
             }
             />
+        <Route path="/blog/:id" element={<BlogDetails />} />
+
       </Routes>
     </Router>
   );
