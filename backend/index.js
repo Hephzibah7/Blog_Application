@@ -29,7 +29,7 @@ app.use('/uploads', express.static('uploads'));
 
 
 // Start the server
-const port = 9002;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
