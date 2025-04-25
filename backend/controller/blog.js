@@ -46,7 +46,7 @@ async function getAllBlogs(req, res){
 }
 async function deleteBlog(req, res){
     try{
-        const blogId=req.params;
+        const blogId=req.params.id;
         const deletedUser=await Blog.findByIdAndDelete(blogId);
         return res.status(200).json({message:"Blog deleted successfully"});
     }
@@ -55,12 +55,34 @@ async function deleteBlog(req, res){
 
     }
 }
+async function updateBlog(req, res) {
+    try {
+        console.log("hello");
+
+        const blogId = req.params.id; 
+        const data = req.body;
+
+        const updatedBlog = await Blog.findByIdAndUpdate(blogId, data, {
+            new: true,
+        });
+
+        return res.status(200).json({
+            message: "Blog updated successfully",
+            updatedBlog,
+        });
+    } catch (error) {
+        console.error("Error updating blog:", error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+}
+
 
 const blogController={
     getAllBlogs:getAllBlogs,
     getUserBlogs:getUserBlogs,
     createBlog:createBlog,
-    deleteBlog:deleteBlog
+    deleteBlog:deleteBlog,
+    updateBlog:updateBlog
 }
 
 export default blogController;

@@ -9,5 +9,6 @@ const router=express.Router();
 router.post("/blogs", verifyToken, upload.single('image'), blogController.createBlog);
 router.get("/blogs", verifyToken, blogController.getUserBlogs);
 router.delete("/blogs/:id", verifyToken, blogController.deleteBlog);
+router.put("/blogs/:id", verifyToken, upload.single('image'), blogController.updateBlog);
 
 export default router;
