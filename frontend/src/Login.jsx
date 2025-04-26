@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {ToastContainer, toast} from "react-toastify";
 import Cookies from "js-cookie"
 import { useUserContext } from "./hooks/UserProvider";
+import api from "../api"
+
 
 const Login = ()=>{
     const [userData, setUserData]=useState({
@@ -21,7 +23,7 @@ const navigate = useNavigate();
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try{
-            const response = await axios.post('http://localhost:9002/auth/login', userData);
+            const response = await api.post('/auth/login', userData);
            if(response.status==200){
             toast.success("Login Successfull !", {
                         position: "top-right",
