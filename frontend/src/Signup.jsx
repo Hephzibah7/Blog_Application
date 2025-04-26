@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {ToastContainer, toast} from "react-toastify";
 import axios from "axios";
+import api from "./api";
 
 const Signup = () => {
 
@@ -19,7 +20,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            const response = await axios.post("http://localhost:9002/auth/signup", userData);
+            const response = await api.post("/auth/signup", userData);
             console.log(response);
             if (response.status == 201) {
                 toast.success("SignUp Successfull !", {
