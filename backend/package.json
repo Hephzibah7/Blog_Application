@@ -18,6 +18,7 @@
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
     "mongodb": "^6.15.0",
+    "mongoose": "^8.14.0",
     "multer": "^1.4.5-lts.2",
     "path": "^0.12.7",
     "react-scripts": "^5.0.1",
