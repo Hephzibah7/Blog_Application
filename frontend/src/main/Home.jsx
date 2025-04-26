@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import Form from "../components_own/Form";
 import axios from "axios"
 import Cookies from "js-cookie";
+import api from "../api"
+
 
 
 const Home = () => {
@@ -41,7 +43,7 @@ const Home = () => {
   }
   const getBlogs = async () => {
     try {
-      const response = await axios.get('http://localhost:9002/blogs/user', config);
+      const response = await api.get('/blogs/user', config);
       // Assuming response.data.blogs is an array
       const formattedBlogs = response.data.blogs.map((blog) => {
         const date = new Date(blog.createdAt);
@@ -62,11 +64,11 @@ const Home = () => {
     let response=[];
           try {
             if(author=="" && category==""){
-            response = await axios.get('http://localhost:9002/blogs', config);
+            response = await api.get('/blogs', config);
           
           }
           else{
-            response = await axios.get('http://localhost:9002/blogs', {
+            response = await api.get('/blogs', {
               params: {
                 category: category,
                 author: author
