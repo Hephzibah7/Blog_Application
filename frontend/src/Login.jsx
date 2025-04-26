@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {ToastContainer, toast} from "react-toastify";
 import Cookies from "js-cookie"
 import { useUserContext } from "./hooks/UserProvider";
-import api from "../api"
+import api from "./api";
 
 
 const Login = ()=>{
