@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie"
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import api from "../api"
 
 const BlogDetails = () => {
   const { id } = useParams(); // Get the blog ID from the URL
@@ -17,7 +18,7 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:9002/blogs/${id}`, config);
+        const response = await api.get(`/blogs/${id}`, config);
         setBlog(response.data);
       } catch (error) {
         console.error("Error fetching blog details", error);
@@ -64,7 +65,7 @@ const BlogDetails = () => {
          <div className="">
          <div className="mt-5">
                 <div className="w-full h-30 relative justify-center align-center">
-                    <img className="h-[600px]  object-contain object-center  rounded-3xl" src={`http://localhost:9002/uploads/${blog.image}`}></img>
+                    <img className="h-[600px]  object-contain object-center  rounded-3xl" src={`${process.env.REACT_APP_BASE_URL}/uploads/${blog.image}`}></img>
                 </div>
             </div>
             <div className="mt-10  text-xl w-[1050px]">
