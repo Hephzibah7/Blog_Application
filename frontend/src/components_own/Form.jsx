@@ -52,11 +52,11 @@ const Form = ({ isOpen, closeModal, getBlogs, formUpdateData }) => {
     }
     if(formData.blogId===""){
       console.log("yes u r creating a new one");
-    const response = await axios.post("http://localhost:9002/blogs", data, config);
+    const response = await api.post("/blogs", data, config);
   }
   else{
     
-    const response = await axios.put(`http://localhost:9002/blogs/${formData.blogId}`, data, config);
+    const response = await api.put(`/blogs/${formData.blogId}`, data, config);
     console.log(response);
   }
     getBlogs();
