@@ -26,7 +26,7 @@ const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlog
 
     const handleDelete = async (blogId) => {
         try {
-            const response = await axios.delete(`http://localhost:9002/blogs/${blogId}`, config);
+            const response = await api.delete(`/blogs/${blogId}`, config);
             if (response.status == 200) {
                 toast.success("Successfully deleted !", {
                     position: "top-right",
@@ -54,7 +54,7 @@ const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlog
     }
     const handleView = async (blogId) => {
         try {
-            const response = await axios.get(`http://localhost:9002/views/${blogId}`, config);
+            const response = await api.get(`/views/${blogId}`, config);
             navigate(`/blog/${blogId}`);
         }
         catch (error) {
@@ -65,7 +65,7 @@ const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlog
         <>
             <div className="w-[370px] h-[480px] flex-col  ">
                 <div className="">
-                    <img className="object-contain object-center" src={`http://localhost:9002/uploads/${image}`} />
+                    <img className="object-contain object-center" src={`${process.env.REACT_APP_BASE_URL}/uploads/${image}`} />
                 </div>
                 <div className="flex-col">
                     <div className="font-bold flex text-xl mt-3 justify-between">
