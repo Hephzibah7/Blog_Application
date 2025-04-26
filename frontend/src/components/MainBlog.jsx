@@ -19,7 +19,7 @@ const MainBlog = () => {
     useEffect(() => {
         const getTopBlog = async () => {
             try {
-                const response = await axios.get('http://localhost:9002/topblogs', config);
+                const response = await api.get('/topblogs', config);
                 setTopBlog(response.data);
             }
             catch (error) {
@@ -44,7 +44,7 @@ const MainBlog = () => {
 
     const handleView = async (blogId) => {
         try {
-            const response = await axios.get(`http://localhost:9002/views/${blogId}`, config);
+            const response = await api.get(`/views/${blogId}`, config);
             navigate(`/blog/${blogId}`);
         }
         catch (error) {
@@ -77,7 +77,7 @@ const MainBlog = () => {
                     </div>
                     <div className="mt-5">
                         <div className="w-full h-30 relative">
-                            <img className="h-[600px]  object-contain object-center  rounded" src={`http://localhost:9002/uploads/${topBlog.image}`}></img>
+                            <img className="h-[600px]  object-contain object-center  rounded" src={`${process.env.REACT_APP_BASE_URL}/uploads/${topBlog.image}`}></img>
                             <div className="absolute top-[500px] p-5 w-full text-white">
                                 <div className="w-4/5 pr-5 flex justify-between">
                                     <div className="flex gap-5">
