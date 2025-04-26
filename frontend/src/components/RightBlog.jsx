@@ -18,7 +18,7 @@ const RightBlog = () => {
   useEffect(() => {
     const getTopBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:9002/toptenblogs", config); // make sure endpoint returns top 10 blogs
+        const response = await api.get("/toptenblogs", config); // make sure endpoint returns top 10 blogs
         console.log("top 10 blogs");
         console.log(response.data);
         setTopTenBlogs(response.data);
@@ -48,7 +48,7 @@ const trim = (text, wordLimit = 10) => {
                 <div className="h-full w-1/2">
                   <img
                     className="object-cover h-full w-full rounded-l-xl "
-                    src={`http://localhost:9002/uploads/${blog.image}`}
+                    src={`${process.env.REACT_APP_BASE_URL}/uploads/${blog.image}`}
                     alt={blog.title}
                   />
                 </div>
