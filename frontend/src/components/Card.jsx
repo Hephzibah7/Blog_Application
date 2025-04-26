@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom";
+import api from "../api"
+
 
 const Card = ({ title, content, author, date, image, bloguserId, blogId, getBlogs, handleFormData, category, openModal }) => {
 
