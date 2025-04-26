@@ -9,9 +9,14 @@ import { fileURLToPath } from 'url';
 const app = express();
 app.use(express.json());
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://magazineblog-sand.vercel.app';
+
+
 app.use(cors({
-    credentials:true
-  }));
+  origin: FRONTEND_URL,
+  credentials: true,               // if you need cookies/auth
+  methods: ['GET','POST','PUT','DELETE']
+}));
 
 const mongoURI =
   "mongodb+srv://heph:heph@cluster0.mjeeyir.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"; // Replace 'your_mongodb_atlas_connection_string' with your actual MongoDB Atlas connection string
