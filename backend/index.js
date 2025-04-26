@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 const app = express();
 app.use(express.json());
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://magazineblog-sand.vercel.app';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://magazineblog-684dfx8qc-hephzibah.vercel.app';
 
 
 app.use(cors({
