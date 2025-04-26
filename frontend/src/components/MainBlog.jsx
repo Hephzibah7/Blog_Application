@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 
 const MainBlog = () => {
     const token = Cookies.get("authToken");

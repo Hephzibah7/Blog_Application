@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import api from "../api";
 const Form = ({ isOpen, closeModal, getBlogs, formUpdateData }) => {
 
   const [formData, setFormData] = useState({
